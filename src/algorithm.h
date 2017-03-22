@@ -11,6 +11,13 @@
  */
 class AlgorithmSolver {
 public:
+
+    int getMaxResultLength(const char *s1, const char *s2) const {
+        int len1 = static_cast<int>(strlen(s1));
+        int len2 = static_cast<int>(strlen(s2));
+        return len1 >= len2? len1 : len2;
+    }
+
     /**
      * Preforms the algorithm and returns result
      *
@@ -18,7 +25,8 @@ public:
      * @param s2 string that contain characters in A­Z
      * @return optimum longest common subsequence of s1 and s2
      */
-    virtual const char* solve(const char *s1, const char *s2) const = 0;
+    virtual const char *solve(const char *s1, const char *s2, char *result) const = 0;
+
 };
 
 extern AlgorithmSolver* solver; // Solver used by main (set in each compiled solution)

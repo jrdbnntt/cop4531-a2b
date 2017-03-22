@@ -6,6 +6,7 @@
 #include <regex>
 #include "algorithm.h"
 
+
 using namespace std;
 
 int main(int argc, const char* argv[]) {
@@ -17,9 +18,13 @@ int main(int argc, const char* argv[]) {
     }
 
     // Run specified algorithm for result
-    const char* result = solver->solve(argv[1], argv[2]);
+
+    char* result = new char[solver->getMaxResultLength(argv[1], argv[2]) + 1];
+    solver->solve(argv[1], argv[2], result);
 
     // Print result
     cout << result << endl;
+
+    delete result;
     return 0;
 }

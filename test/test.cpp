@@ -54,10 +54,12 @@ private:
 
 
 bool TestCase::test(AlgorithmSolver *solver) const {
-    const char* result = solver->solve(s1, s2);
+    char* result = new char[solver->getMaxResultLength(s1, s2) + 1];
+    solver->solve(s1, s2, result);
     if (!check(result)) {
         throw TestException(this, "FAILED", result);
     };
+    delete result;
 }
 
 
@@ -71,7 +73,7 @@ const vector<TestCase> simple_cases = vector<TestCase>({
         TestCase("AB", "B", "B"),
         TestCase("AB", "AB", "AB"),
         TestCase("ABC", "AB", "AB"),
-        TestCase("ABC", "AC", "AB"),
+        TestCase("ABC", "C", "C"),
         TestCase("ABC", "AC", "AC"),
         TestCase("ACCGGTCGAGTGCGCGGAAGCCGGCCGAA", "GTCGTTCGGAATGCCGTTGCTCTGTAAA", "GTCGTCGGAAGCCGGCCGAA")
 });
