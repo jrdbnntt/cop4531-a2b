@@ -1,6 +1,6 @@
 /*
  * Dynamic Algorithm from book:
- * LCS-Length(X,Y)
+ * DYNAMIC-LCS(X,Y)
  *  m = X.length
  *  n = Y.length
  *  let b[1..m, 1..n] and c[0..m, 0..n] be new tables
@@ -19,14 +19,28 @@
  *          else
  *              c[i,j] = c[i,j-1]
  *              b[i,j] = W Direction
- * return c and b
+ * return CONSTRUCT-LCS(X,Y,c,b)
  *
+ * CONSTRUCT-LCS(X,Y,c,b)
+ *  result = ""
+ *  i = X.length - 1
+ *  j = Y.length - 1
+ *  while (i >= 1 && j >= 1 && c[i][j] > 0)
+ *      direction = b[i][j]
+ *      if direction == NE Direction
+ *          result += X[i]
+ *          --j
+ *          --i
+ *      else if direction == N Direction
+ *          --i
+ *      else // west
+ *          --j
+ *  return result
  *
- * DynamicSolver.solve(X, Y) is the implementation of the above algorithm plus the actual string resolution
+ * DynamicSolver.solve(X, Y) is the implementation of the above algorithms
  */
 
 
-#include <string>
 #include <cstring>
 #include "algorithm.h"
 
@@ -53,7 +67,7 @@ public:
             b[i] = new TABLE_DIRECTION[n];
         }
 
-        // Populate c and c
+        // Populate b and c via Dynamic Programming
         for (int i = 1; i < m; ++i) {
             for (int j = 1 ; j < n; ++j) {
                 if (s1[i-1] == s2[j-1]) {
@@ -76,7 +90,7 @@ public:
         {
             int i = m - 1, j = n - 1;
             result[c[i][j]] = '\0';
-            while (i >= 1 && j >= 1, c[i][j] > 0) {
+            while (i >= 1 && j >= 1 && c[i][j] > 0) {
                 switch (b[i][j]) {
                     case NW: // Actual match, record char and move
                         result[c[i][j] - 1] = s1[i - 1];
