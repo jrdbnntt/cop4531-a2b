@@ -89,9 +89,17 @@ public:
         int** c = new int*[m];
         TABLE_DIRECTION** b = new TABLE_DIRECTION*[m];
         for (int i = 0; i < m; ++i) {
-            c[i] = new int[n] {0};
+            c[i] = new int[n];
             b[i] = new TABLE_DIRECTION[n];
         }
+        // Init top + left rows to 0
+        for (int i = 0; i < m; ++i) {
+            c[i][0] = 0;
+        }
+        for (int j = 1; j < n; ++j) {
+            c[0][j] = 0;
+        }
+
 
         for (int i = 1; i < m; ++i) {
             for (int j = 1; j < n; ++j) {
