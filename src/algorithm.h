@@ -6,6 +6,8 @@
 #ifndef ALGORITHM_H
 #define ALGORITHM_H
 
+#include <cstring>
+
 /**
  * Abstract solver, to be extended by each of the two solutions
  */
