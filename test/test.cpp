@@ -72,7 +72,8 @@ const vector<TestCase> simple_cases = vector<TestCase>({
         TestCase("AB", "AB", "AB"),
         TestCase("ABC", "AB", "AB"),
         TestCase("ABC", "AC", "AB"),
-        TestCase("ABC", "AC", "AC")
+        TestCase("ABC", "AC", "AC"),
+        TestCase("ACCGGTCGAGTGCGCGGAAGCCGGCCGAA,", "GTCGTTCGGAATGCCGTTGCTCTGTAAA", "GTCGTCGGAAGCCGGCCGAA")
 });
 
 
