@@ -12,7 +12,7 @@ You   should   create   programs   that   will   compute   an   optimum   longes
 2.   The memoized version of the above algorithm. 
 
 ## Running the program
-Your program will be run as follows:
+Your program will be test as follows:
 
 `<executable-­‐name> <string1-­‐file-­‐name> <string2-­‐file-­‐name>`
 
