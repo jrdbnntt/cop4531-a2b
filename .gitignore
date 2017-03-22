@@ -89,3 +89,4 @@ fabric.properties
 
 # Custom
 cmake-build-*
+*.tar
