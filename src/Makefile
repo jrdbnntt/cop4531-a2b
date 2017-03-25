@@ -3,7 +3,7 @@
 GCC=g++ -std=c++11
 RELEASE_NAME=proj1
 RELEASE_FILES=\
-	makefile\
+	Makefile\
 	LOG.txt\
 	*.cpp\
 	*.h\

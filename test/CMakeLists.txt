@@ -1,2 +1,4 @@
 add_executable(DynamicSolver-simple_check.exe DynamicSolver/simple_check.cpp)
+add_executable(DynamicSolver-generate_stats.exe DynamicSolver/generate_stats.cpp)
 add_executable(MemoizedSolver-simple_check.exe MemoizedSolver/simple_check.cpp)
+add_executable(MemoizedSolver-generate_stats.exe MemoizedSolver/generate_stats.cpp)

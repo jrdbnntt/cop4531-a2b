@@ -8,6 +8,8 @@
 #include <exception>
 #include <string>
 #include <iostream>
+#include <map>
+#include <ctime>
 #include "../src/algorithm.h"
 
 using namespace std;
@@ -96,7 +98,7 @@ const vector<TestCase> simple_cases = vector<TestCase>({
  * @param len
  * @return
  */
-const char* randStringArgument(int len) {
+char* randStringArgument(int len) {
     char* str = new char[len+1];
     str[len-1] = '\0';
     srand(time(NULL)); // init random seed
@@ -107,3 +109,45 @@ const char* randStringArgument(int len) {
     return str;
 }
 
+
+struct Coordinate {
+    double x;
+    double y;
+    Coordinate(double x, double y) {
+        this->x = x;
+        this->y = y;
+    }
+};
+
+double CLOCK_TICKS_PER_MILLISECOND = CLOCKS_PER_SEC / 1000;
+
+void time_runs(vector<Coordinate>& results, AlgorithmSolver* solver, int totalRuns, int testsPerRun) {
+    clock_t start;
+    double sum;
+    char * s1;
+    char * s2;
+    char * result;
+    for (int i = 0; i < totalRuns; ++i) {
+        sum = 0;
+        for (int j = 0; j < testsPerRun; ++j) {
+            s1 = randStringArgument(i);
+            s2 = randStringArgument(i);
+            result = new char[solver->getMaxResultLength(s1, s2)+1];
+
+            start = clock();
+            solver->solve(s1, s2, result);
+            sum += (clock() - start)/CLOCK_TICKS_PER_MILLISECOND;
+
+            delete s1;
+            delete s2;
+            delete result;
+        }
+        results.push_back(Coordinate(i, sum/testsPerRun));
+    }
+}
+
+void print_runs(vector<Coordinate>& results, ostream& out) {
+    for (int i = 0; i < results.size(); ++i) {
+        out << results[i].x << "," << results[i].y << "\n";
+    }
+}
