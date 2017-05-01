@@ -3,38 +3,40 @@
  */
 
 #include <iostream>
-#include <cstring>
+#include <fstream>
+#include <sstream>
 #include "algorithm.h"
 
 using namespace std;
 
 /**
- * Validates arg against [A-Z]+
- * @param arg
- * @return
+ * Retrieves string from file
  */
-bool checkArg(const char * arg) {
-    int len = (int) strlen(arg);
-    char c;
-    for (int i = 0; i < len; ++i) {
-        c = arg[i];
-        if (c < 'A' || c > 'Z') {
-            return false;
-        }
+void readStringFromFile(const char *fileName, string &dst) {
+    ifstream inFile;
+    stringstream ss;
+    string line;
+
+    inFile.open(fileName);
+    while (getline(inFile, line)) {
+        ss << line;
     }
-    return true;
+    inFile.close();
+
+    dst = string(ss.str());
 }
 
 int main(int argc, const char* argv[]) {
-    // Validate arguments
-    if (argc != 3 || !checkArg(argv[1]) || !checkArg(argv[2])) {
-        cerr << "Error: Invalid or missing arguments" << endl;
-        exit(1);
-    }
+    // Retrieve Arguments
+    string s1, s2;
+    readStringFromFile(argv[1], s1);
+    readStringFromFile(argv[2], s2);
+    const char *arg1 = s1.c_str();
+    const char *arg2 = s2.c_str();
 
     // Run specified algorithm for result
-    char* result = new char[solver->getMaxResultLength(argv[1], argv[2]) + 1];
-    solver->solve(argv[1], argv[2], result);
+    char* result = new char[solver->getMaxResultLength(arg1, arg2) + 1];
+    solver->solve(arg1, arg2, result);
 
     // Print result
     cout << result << endl;
